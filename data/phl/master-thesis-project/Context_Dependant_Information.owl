@@ -1,0 +1,228 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns="http://infoeng.se/~karl/ontologies/2011/02/Context_Dependant_Information.owl#"
+  xml:base="http://infoeng.se/~karl/ontologies/2011/02/Context_Dependant_Information.owl">
+  <owl:Ontology rdf:about="">
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-02-28</owl:versionInfo>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Context-dependant Document pattern as used in JLL Urology case.</rdfs:comment>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Context-dependant Document pattern</rdfs:label>
+  </owl:Ontology>
+  <owl:Class rdf:ID="Mechanical_work">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Activity"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Mechanical work</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Medical_tasks">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Activity"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Medical tasks</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Information">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="informationIsRelevantInContext"/>
+        </owl:onProperty>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:minCardinality>
+      </owl:Restriction>
+    </owl:equivalentClass>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Information</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Surgery">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Surgery</rdfs:label>
+    <rdfs:subClassOf rdf:resource="#Medical_tasks"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Activity">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Activity</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Role">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Role</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Context">
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="contextIncludesRole"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </owl:equivalentClass>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="contextIncludesActivity"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </owl:equivalentClass>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Context</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="#informationIsRelevantInContext">
+    <rdfs:domain rdf:resource="#Information"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Information is relevant in context</rdfs:label>
+    <rdfs:range rdf:resource="#Context"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#contextIncludesActivity">
+    <rdfs:range rdf:resource="#Activity"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Context includes Activity</rdfs:label>
+    <rdfs:domain rdf:resource="#Context"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#contextIncludesRole">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Context includes Role</rdfs:label>
+    <rdfs:domain rdf:resource="#Context"/>
+    <rdfs:range rdf:resource="#Role"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:ID="informationLocation">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >information location</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The location of a particular piece of information or documentation, represented as an URI.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Information"/>
+  </owl:DatatypeProperty>
+  <Information rdf:ID="NHS_Symptom_Checker">
+    <informationLocation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.nhs.uk/nhsdirect/pages/symptoms.aspx</informationLocation>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >NHS Symptom Checker</rdfs:label>
+    <informationIsRelevantInContext>
+      <Context rdf:ID="John_Doe_doing_diagnosis">
+        <contextIncludesRole>
+          <Role rdf:ID="Unqualified_person">
+            <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Unqualified person</rdfs:label>
+          </Role>
+        </contextIncludesRole>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Academic doing surgery</rdfs:label>
+        <contextIncludesActivity>
+          <Medical_tasks rdf:ID="Diagnosis">
+            <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Diagnosis</rdfs:label>
+          </Medical_tasks>
+        </contextIncludesActivity>
+      </Context>
+    </informationIsRelevantInContext>
+  </Information>
+  <Information rdf:ID="WebMD">
+    <informationLocation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.webmd.com/</informationLocation>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Web MD</rdfs:label>
+    <informationIsRelevantInContext rdf:resource="#John_Doe_doing_diagnosis"/>
+  </Information>
+  <Information rdf:ID="Auto_repair_for_dummies">
+    <informationLocation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.amazon.com/Auto-Repair-Dummies-Deanna-Sclar/dp/0764550896</informationLocation>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Auto repair for dummies</rdfs:label>
+    <informationIsRelevantInContext>
+      <Context rdf:ID="Doctor_reparing_his_car">
+        <contextIncludesRole>
+          <Role rdf:ID="Doctor">
+            <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Doctor</rdfs:label>
+          </Role>
+        </contextIncludesRole>
+        <contextIncludesActivity>
+          <Mechanical_work rdf:ID="Car_building">
+            <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Car building</rdfs:label>
+          </Mechanical_work>
+        </contextIncludesActivity>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Doctor reparing his car</rdfs:label>
+      </Context>
+    </informationIsRelevantInContext>
+  </Information>
+  <Information rdf:ID="Journal_of_Medical_Diagnostics">
+    <informationLocation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.someJournalWebSite.com</informationLocation>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Journal of Medical Diagnostics</rdfs:label>
+    <informationIsRelevantInContext>
+      <Context rdf:ID="Doctor_doing_diagnosis">
+        <contextIncludesRole rdf:resource="#Doctor"/>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Doctor doing diagnosis</rdfs:label>
+        <contextIncludesActivity rdf:resource="#Diagnosis"/>
+      </Context>
+    </informationIsRelevantInContext>
+  </Information>
+  <Information rdf:ID="Car_repair_guide">
+    <informationLocation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://carrepairguide.org</informationLocation>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Car repair guide</rdfs:label>
+    <informationIsRelevantInContext rdf:resource="#Doctor_reparing_his_car"/>
+  </Information>
+  <Medical_tasks rdf:ID="Physical_therapy">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Physical therapy</rdfs:label>
+  </Medical_tasks>
+  <Mechanical_work rdf:ID="Windmill_maintenance">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Windmill maintenance</rdfs:label>
+  </Mechanical_work>
+  <Context rdf:ID="Doctor_doing_brainsurgery">
+    <contextIncludesRole rdf:resource="#Doctor"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Doctor doing brainsurgery</rdfs:label>
+    <contextIncludesActivity>
+      <Surgery rdf:ID="Brain_surgery">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Brain surgery</rdfs:label>
+      </Surgery>
+    </contextIncludesActivity>
+  </Context>
+  <Role rdf:ID="Car_mechanic">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Car mechanic</rdfs:label>
+  </Role>
+  <Information rdf:ID="HealthLine">
+    <informationLocation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >http://www.healthline.com/</informationLocation>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Health line</rdfs:label>
+    <informationIsRelevantInContext rdf:resource="#John_Doe_doing_diagnosis"/>
+  </Information>
+  <Context rdf:ID="Nurse_doing_brain_surgery">
+    <contextIncludesRole>
+      <Role rdf:ID="Nurse">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Nurse</rdfs:label>
+      </Role>
+    </contextIncludesRole>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Nurse doing brain surgery</rdfs:label>
+    <contextIncludesActivity rdf:resource="#Brain_surgery"/>
+  </Context>
+</rdf:RDF>
+
+<!-- Created with TopBraid -->

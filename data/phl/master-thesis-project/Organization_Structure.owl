@@ -1,0 +1,369 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns="http://infoeng.se/~karl/ontologies/2011/02/Organization_Structure.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://infoeng.se/~karl/ontologies/2011/02/Organization_Structure.owl">
+  <owl:Ontology rdf:about="">
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2011-02-28</owl:versionInfo>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Organization Structure pattern</rdfs:label>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Organization Structure pattern from Fowler book. Reengineered by Karl Hammar &lt;karl.hammar@jth.hj.se&gt;.</rdfs:comment>
+  </owl:Ontology>
+  <owl:Class rdf:ID="Person">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Party"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Person</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Sales_Office">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Organization"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Sales Office</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Organization_Structure_Type">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Organization Structure Type</rdfs:label>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="isGovernedByRule"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Organization_Structure">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Organization Structure</rdfs:label>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="hasChildParty"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </owl:equivalentClass>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="isOfType"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </owl:equivalentClass>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="hasParentParty"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </owl:equivalentClass>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="hasTimePeriod"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Region">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Organization"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Region</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Operating_Unit">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Organization"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Operating Unit</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="#Organization">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Party"/>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Organization</rdfs:label>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:ID="Division"/>
+          <owl:Class rdf:about="#Operating_Unit"/>
+          <owl:Class rdf:about="#Region"/>
+          <owl:Class rdf:about="#Sales_Office"/>
+        </owl:unionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Rule">
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Rule</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="#Party">
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Organization"/>
+          <owl:Class rdf:about="#Person"/>
+        </owl:unionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Party</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="#Division">
+    <rdfs:subClassOf rdf:resource="#Organization"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Division</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Time_Period">
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="timePeriodEnds"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </owl:equivalentClass>
+    <owl:equivalentClass>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="timePeriodStarts"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </owl:equivalentClass>
+    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Time Period</rdfs:label>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="#isGovernedByRule">
+    <rdfs:range rdf:resource="#Rule"/>
+    <rdfs:domain rdf:resource="#Organization_Structure_Type"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >rule</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#isOfType">
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >type</rdfs:label>
+    <rdfs:range rdf:resource="#Organization_Structure_Type"/>
+    <rdfs:domain rdf:resource="#Organization_Structure"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasParentParty">
+    <rdfs:domain rdf:resource="#Organization_Structure"/>
+    <rdfs:range rdf:resource="#Party"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >parent</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasChildParty">
+    <rdfs:domain rdf:resource="#Organization_Structure"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >child</rdfs:label>
+    <rdfs:range rdf:resource="#Party"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasTimePeriod">
+    <rdfs:range rdf:resource="#Time_Period"/>
+    <rdfs:domain rdf:resource="#Organization_Structure"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >time period</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="#timePeriodEnds">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <rdfs:domain rdf:resource="#Time_Period"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >time period ends</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#timePeriodStarts">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <rdfs:domain rdf:resource="#Time_Period"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >time period starts</rdfs:label>
+  </owl:DatatypeProperty>
+  <Organization_Structure rdf:ID="Weapons_lab_subdepartment_of_RD">
+    <isOfType>
+      <Organization_Structure_Type rdf:ID="Department">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Department</rdfs:label>
+      </Organization_Structure_Type>
+    </isOfType>
+    <hasParentParty>
+      <Division rdf:ID="RD">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >RD</rdfs:label>
+      </Division>
+    </hasParentParty>
+    <hasTimePeriod>
+      <Time_Period rdf:ID="As_long_as_we_can_remember">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >As long as we can remember</rdfs:label>
+      </Time_Period>
+    </hasTimePeriod>
+    <hasChildParty>
+      <Operating_Unit rdf:ID="Weapons_Development_Lab">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Weapons Development Lab</rdfs:label>
+      </Operating_Unit>
+    </hasChildParty>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Weapons lab subdepartment of RD</rdfs:label>
+  </Organization_Structure>
+  <Organization_Structure rdf:ID="Martin_works_in_WDL">
+    <isOfType>
+      <Organization_Structure_Type rdf:ID="Works_in">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Works in</rdfs:label>
+      </Organization_Structure_Type>
+    </isOfType>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Martin works in WDL</rdfs:label>
+    <hasParentParty rdf:resource="#Weapons_Development_Lab"/>
+    <hasTimePeriod>
+      <Time_Period rdf:ID="Since_February_2003">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Since February 2003</rdfs:label>
+      </Time_Period>
+    </hasTimePeriod>
+    <hasChildParty>
+      <Person rdf:ID="Martin">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Martin</rdfs:label>
+      </Person>
+    </hasChildParty>
+  </Organization_Structure>
+  <Organization_Structure rdf:ID="Martin_reports_to_WDL_boss">
+    <isOfType>
+      <Organization_Structure_Type rdf:ID="Reports_to">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Reports to</rdfs:label>
+      </Organization_Structure_Type>
+    </isOfType>
+    <hasTimePeriod rdf:resource="#Since_February_2003"/>
+    <hasChildParty rdf:resource="#Martin"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Martin reports to WDL boss</rdfs:label>
+    <hasParentParty>
+      <Person rdf:ID="Head_of_WDL">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Head of WDL</rdfs:label>
+      </Person>
+    </hasParentParty>
+  </Organization_Structure>
+  <Organization_Structure rdf:ID="Martins_employment_at_Acme">
+    <isOfType>
+      <Organization_Structure_Type rdf:ID="Employment">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Employment</rdfs:label>
+      </Organization_Structure_Type>
+    </isOfType>
+    <hasParentParty>
+      <Organization rdf:ID="Acme_Inc">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Acme Inc</rdfs:label>
+      </Organization>
+    </hasParentParty>
+    <hasChildParty rdf:resource="#Martin"/>
+    <hasTimePeriod rdf:resource="#Since_February_2003"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Martins employment at Acme</rdfs:label>
+  </Organization_Structure>
+  <Organization_Structure rdf:ID="project_mayhem_lead_reports">
+    <isOfType rdf:resource="#Reports_to"/>
+    <hasTimePeriod>
+      <Time_Period rdf:ID="Runtime_of_Project_Mayhem">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Runtime of Project Mayhem</rdfs:label>
+      </Time_Period>
+    </hasTimePeriod>
+    <hasChildParty>
+      <Person rdf:ID="Project_Mayhem_lead">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Project Mayhem lead</rdfs:label>
+      </Person>
+    </hasChildParty>
+    <hasParentParty>
+      <Person rdf:ID="CEO_Acme_Inc">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >CEO Acme Inc</rdfs:label>
+      </Person>
+    </hasParentParty>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >project mayhem lead reports</rdfs:label>
+  </Organization_Structure>
+  <Organization_Structure rdf:ID="mayheam_dev_team_in_mayhem">
+    <isOfType rdf:resource="#Works_in"/>
+    <hasTimePeriod rdf:resource="#Runtime_of_Project_Mayhem"/>
+    <hasChildParty>
+      <Organization rdf:ID="Mayhem_Dev_Deam">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Mayhem Dev Deam</rdfs:label>
+      </Organization>
+    </hasChildParty>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >mayheam dev team in mayhem</rdfs:label>
+    <hasParentParty>
+      <Organization rdf:ID="Project_Mayhem">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Project Mayhem</rdfs:label>
+      </Organization>
+    </hasParentParty>
+  </Organization_Structure>
+  <Organization_Structure rdf:ID="Martin_was_in_Project_Mayhem">
+    <isOfType rdf:resource="#Works_in"/>
+    <hasChildParty rdf:resource="#Martin"/>
+    <hasTimePeriod>
+      <Time_Period rdf:ID="September_2005_to_April_2006">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >September 2005 to April 2006</rdfs:label>
+      </Time_Period>
+    </hasTimePeriod>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Martin was in Project Mayhem</rdfs:label>
+    <hasParentParty rdf:resource="#Project_Mayhem"/>
+  </Organization_Structure>
+  <Organization_Structure rdf:ID="WDL_boss_reports_to_reseach_head">
+    <isOfType rdf:resource="#Reports_to"/>
+    <hasChildParty rdf:resource="#Head_of_WDL"/>
+    <hasTimePeriod rdf:resource="#As_long_as_we_can_remember"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >WDL boss reports to reseach head</rdfs:label>
+    <hasParentParty>
+      <Person rdf:ID="Director_of_Research">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Director of Research</rdfs:label>
+      </Person>
+    </hasParentParty>
+  </Organization_Structure>
+  <Organization_Structure rdf:ID="Martin_project_mayhem_reports">
+    <isOfType rdf:resource="#Reports_to"/>
+    <hasChildParty rdf:resource="#Martin"/>
+    <hasTimePeriod rdf:resource="#September_2005_to_April_2006"/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Martin project mayhem reports</rdfs:label>
+    <hasParentParty rdf:resource="#Project_Mayhem_lead"/>
+  </Organization_Structure>
+</rdf:RDF>
+
+<!-- Created with TopBraid -->
